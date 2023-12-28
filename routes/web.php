@@ -24,4 +24,4 @@ Route::post('/division/submit', [DivisionController::class, 'insert'])->name('di
 Route::post('/district/submit', [DivisionController::class, 'insertDistrict'])->name('district.insert');
 Route::post('/upazila/submit', [DivisionController::class, 'insertUpazila'])->name('upazila.insert');
 
-Route::get('/ajax/district/{$id}', [AjaxController::class, 'district'])->name('district.ajax');
+Route::get('/ajax/district/{id}', [AjaxController::class, 'district'])->name('district.ajax');

@@ -8,7 +8,7 @@
     <title>Bootstrap Form Example</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    
 </head>
 
 <body>
@@ -35,10 +35,10 @@
                 @endphp
                 <label for="exampleInputEmail1">District Name</label>
                 <select class="form-control" name="district_id" id="district">
-                    <option>select district</option>
-                    @foreach($allDis as $dis)
+                    <option>please select division</option>
+                    <!-- @foreach($allDis as $dis)
                     <option value="{{$dis->district_id}}">{{$dis->district_name}}</option>
-                    @endforeach
+                    @endforeach -->
                 </select>
             </div>
             <div class="form-group">
@@ -53,7 +53,8 @@
     </div>
 
     <!-- Bootstrap JS and dependencies (jQuery, Popper.js) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
@@ -66,11 +67,10 @@
 
         $(document).ready(function() {
 
-
             function getDistrict() {
                 var id = $("#division").val();
                 var url = $("#division").data('url');
-                var newurl = url + "ajax/district/" + id;
+                var newurl = url + "/ajax/district/" + id;
                 console.log(newurl);
 
                 $.ajax({
@@ -79,15 +79,17 @@
                     cache: false,
                     dataType: "html",
                     success: function(data) {
-                        $("$district").html(data);
+                        $("#district").html(data);
                     }
                 });
             }
             $(document).on("change", "#division", function(e) {
                 e.preventDefault();
+            
                 var id = $(this).val();
                 var url = $(this).data('url');
-                var newurl = url + "ajax/district/" + id;
+                var newurl = url + "/ajax/district/" + id;
+
 
                 $.ajax({
                     type: "GET",
@@ -95,8 +97,8 @@
                     cache: false,
                     dataType: "html",
                     success: function(data) {
-                        // return getDistrict();
-                        console.log(data);
+                        getDistrict();
+                         console.log(data);
                     }
                 });
             });
