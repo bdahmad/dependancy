@@ -8,6 +8,7 @@
     <title>Bootstrap Form Example</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -56,10 +57,49 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
+        // alert('hello');
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
+        });
+
+        $(document).ready(function() {
+
+
+            function getDistrict() {
+                var id = $("#division").val();
+                var url = $("#division").data('url');
+                var newurl = url + "ajax/district/" + id;
+                console.log(newurl);
+
+                $.ajax({
+                    type: "GET",
+                    url: newurl,
+                    cache: false,
+                    dataType: "html",
+                    success: function(data) {
+                        $("$district").html(data);
+                    }
+                });
+            }
+            $(document).on("change", "#division", function(e) {
+                e.preventDefault();
+                var id = $(this).val();
+                var url = $(this).data('url');
+                var newurl = url + "ajax/district/" + id;
+
+                $.ajax({
+                    type: "GET",
+                    url: newurl,
+                    cache: false,
+                    dataType: "html",
+                    success: function(data) {
+                        // return getDistrict();
+                        console.log(data);
+                    }
+                });
+            });
         });
     </script>
 </body>
